@@ -3,7 +3,7 @@ vim9script noclear
 var context: dict<any>
 
 var source: dict<any>
-var restcmd: string
+var winrestcmd: string
 var ui: dict<any>
 var items: list<any>
 var filterd: dict<list<any>>
@@ -14,7 +14,8 @@ export def Open(ex: dict<any>): void
     winid: win_getid(),
     input: '',
   }
-  ui = { winrestcmd: winrestcmd() }
+  winrestcmd = winrestcmd()
+  ui = {}
 
   InitBuffer()
   InitFilterBuffer()
@@ -128,7 +129,7 @@ def Quit(): void
   win_execute(ui.filterWinid, 'close')
   win_execute(ui.winid, 'close')
   win_gotoid(context.winid)
-  execute(ui.winrestcmd)
+  execute(winrestcmd)
 enddef
 
 def Refresh(): void
