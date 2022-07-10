@@ -19,7 +19,7 @@ def Files(dirs: list<string>): list<string>
     var ftype = getftype(e)
     if ftype ==# 'dir'
       dirfiles += readdir(e)->mapnew((_, f) => $"{e}/{f}")->Files()
-    else
+    elseif ftype ==# 'file'
       add(entries, e)
     endif
   endfor
